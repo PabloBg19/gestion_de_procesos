@@ -467,5 +467,7 @@ para usar las tuberias y conectar los archivos debemos de hacer los siguientes p
 ### 2. abrir la cmd con la ruta de los target 
 ![imagen cmd](targetruta.png)
 
+### 3. el primer paso cmd es ejecutar lector de texto
+![lector de texto](lectocmd.png)
 
 
