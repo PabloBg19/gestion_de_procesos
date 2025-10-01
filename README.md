@@ -456,25 +456,135 @@ mvn clean package
 java -jar target/lectorTExto-1.0-SNAPSHOT.jar
 ```
 
-# USO DE TUBERIAS
+# USO DE TUBERÍAS (PIPES) EN JAVA
 
-para usar las tuberias y conectar los archivos debemos de hacer los siguientes pasos:
+## Concepto de Tuberías
+Las tuberías permiten conectar la salida de un programa con la entrada de otro, creando un flujo de datos entre múltiples aplicaciones. En este caso, vamos a encadenar varios programas Java para procesar texto de forma secuencial.
 
-### 1. Poner todos los .jar en el mismo target, en este caso he puesto todos los .jar dentro del target de lector de texto 
--
-![imagen target](imagentarget.png)
+---
 
-### 2. abrir la cmd con la ruta de los target 
-![imagen cmd](targetruta.png)
+## Preparación del Entorno
 
-### 3. el primer paso cmd es ejecutar lector de texto
-![lector de texto](lectocmd.png)
+### 1. Organizar los archivos JAR
+Primero, debemos colocar todos los archivos `.jar` en el mismo directorio para facilitar su ejecución. En este ejemplo, todos los JAR están ubicados en la carpeta `target` del proyecto **lector-de-texto**:
 
-### 4. ahora usamos el lector de texto con el contador de palabras
-![imagen contador](contador.png)
+![Imagen target](imagentarget.png)
 
-### 5. ahora lo usamos con el filtrar (en este caso esta igual ya que ninguna linea ocupa menos de 20 caracteres)
-![filtrar](listar.png)
+**Archivos necesarios:**
+- `lector-de-texto.jar` - Lee y muestra el contenido de archivos
+- `contador-palabras.jar` - Cuenta las palabras del texto recibido
+- `filtrar-lineas.jar` - Filtra líneas según criterios específicos (ej: longitud)
 
-## 6. ahora usamos todos
-![todos](todo.png)
+---
+
+### 2. Abrir la línea de comandos (CMD)
+Navegamos hasta la ruta donde están ubicados los archivos JAR:
+
+![Imagen CMD](targetruta.png)
+
+**Comando utilizado:**
+```cmd
+cd ruta\al\target
+```
+
+---
+
+## Ejemplos de Uso con Tuberías
+
+### 3. Ejecución básica - Lector de texto
+Primero probamos el lector de texto de forma individual para verificar que funciona correctamente:
+
+![Lector de texto](lectocmd.png)
+
+**Comando:**
+```cmd
+java -jar lector-de-texto.jar archivo.txt
+```
+
+**¿Qué hace?** Lee el archivo especificado y muestra su contenido en la consola.
+
+---
+
+### 4. Tubería: Lector + Contador de palabras
+Conectamos el lector de texto con el contador de palabras usando el operador pipe `|`:
+
+![Imagen contador](contador.png)
+
+**Comando:**
+```cmd
+java -jar lector-de-texto.jar archivo.txt | java -jar contador-palabras.jar
+```
+
+**¿Qué hace?**
+1. `lector-de-texto.jar` lee el archivo y envía su contenido como salida estándar
+2. El operador `|` captura esa salida y la redirige como entrada del siguiente programa
+3. `contador-palabras.jar` recibe el texto y cuenta las palabras totales
+
+---
+
+### 5. Tubería: Lector + Filtrador de líneas
+Ahora filtramos las líneas según su longitud (en este caso, líneas con más de 20 caracteres):
+
+![Filtrar](listar.png)
+
+**Comando:**
+```cmd
+java -jar lector-de-texto.jar archivo.txt | java -jar filtrar-lineas.jar 20
+```
+
+**¿Qué hace?**
+1. Lee el archivo de texto
+2. Filtra y muestra solo las líneas que cumplen con el criterio de longitud
+3. En este ejemplo, todas las líneas tienen más de 20 caracteres, por eso el resultado es el mismo
+
+---
+
+### 6. Tubería múltiple: Lector + Filtrador + Contador
+Finalmente, encadenamos los tres programas para realizar un procesamiento completo:
+
+![Todos](todo.png)
+
+**Comando:**
+```cmd
+java -jar lector-de-texto.jar archivo.txt | java -jar filtrar-lineas.jar 20 | java -jar contador-palabras.jar
+```
+
+**¿Qué hace?**
+1. **Lector**: Lee el contenido del archivo
+2. **Filtrador**: Filtra las líneas según el criterio establecido (>20 caracteres)
+3. **Contador**: Cuenta las palabras del texto filtrado y muestra el resultado final
+
+**Flujo de datos:**
+```
+Archivo → Lector → Filtrador → Contador → Resultado
+```
+
+---
+
+## Ventajas de las Tuberías
+
+✅ **Modularidad**: Cada programa tiene una función específica y bien definida  
+✅ **Reutilización**: Los mismos programas pueden combinarse de diferentes formas  
+✅ **Eficiencia**: No es necesario crear archivos temporales entre pasos  
+✅ **Flexibilidad**: Se pueden añadir o quitar pasos según sea necesario  
+
+---
+
+## Notas Importantes
+
+- El operador `|` funciona tanto en Windows (CMD) como en Linux/Mac (Terminal)
+- Cada programa debe leer desde la entrada estándar (`System.in`) y escribir a la salida estándar (`System.out`)
+- El orden de los programas en la tubería es crucial para obtener el resultado deseado
+- Si un programa falla, toda la cadena de tuberías puede interrumpirse
+
+---
+
+## Requisitos Técnicos
+
+- Java JDK 8 o superior instalado
+- Los archivos JAR deben estar correctamente compilados
+- Permisos de lectura en el directorio de trabajo
+
+## Autor
+
+Documentación sobre el uso de tuberías con aplicaciones Java modulares.
