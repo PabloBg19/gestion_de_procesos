@@ -470,4 +470,7 @@ para usar las tuberias y conectar los archivos debemos de hacer los siguientes p
 ### 3. el primer paso cmd es ejecutar lector de texto
 ![lector de texto](lectocmd.png)
 
+### 4. ahora usamos el lector de texto con el contador de palabras
+![imagen contador](contador.png)
+
 
