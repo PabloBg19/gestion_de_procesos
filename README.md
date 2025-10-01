@@ -300,6 +300,181 @@ filtrarLineas/
 
 ---
 
+##LECTOR DE TEXTO
+# Lector de Texto
+
+Aplicación Java simple para leer archivos de texto desde los recursos del proyecto.
+
+## 📋 Descripción
+
+Este proyecto lee y muestra en consola el contenido de un archivo de texto ubicado en la carpeta `resources` del proyecto. Es útil para aprender a manejar archivos empaquetados dentro de un JAR en aplicaciones Java.
+
+## 🛠️ Tecnologías
+
+- **Java**: Lenguaje de programación
+- **Maven**: Gestor de dependencias y construcción del proyecto
+- **JUnit 3.8.1**: Framework de pruebas (incluido por defecto)
+
+## 📁 Estructura del Proyecto
+
+```
+lectorTExto/
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── lectortexto/
+│   │   │       └── lectorTexto.java
+│   │   └── resources/
+│   │       └── archivo.txt
+│   └── test/
+├── pom.xml
+└── README.md
+```
+
+## ⚙️ Configuración del POM (pom.xml)
+
+### Información del Proyecto
+```xml
+<groupId>org.example</groupId>
+<artifactId>lectorTExto</artifactId>
+<version>1.0-SNAPSHOT</version>
+<packaging>jar</packaging>
+```
+- **groupId**: Identificador del grupo/organización
+- **artifactId**: Nombre del proyecto
+- **version**: Versión actual (SNAPSHOT indica desarrollo)
+- **packaging**: Tipo de empaquetado (JAR)
+
+### Propiedades
+```xml
+<properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+</properties>
+```
+Define la codificación de caracteres como UTF-8 para evitar problemas con caracteres especiales.
+
+### Plugin Maven Jar
+```xml
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-jar-plugin</artifactId>
+    <version>3.4.1</version>
+    <configuration>
+        <archive>
+            <manifest>
+                <mainClass>lectortexto.lectorTexto</mainClass>
+            </manifest>
+        </archive>
+    </configuration>
+</plugin>
+```
+Configura el plugin para generar el JAR e indica cuál es la clase principal ejecutable.
+
+### Dependencias
+```xml
+<dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>3.8.1</version>
+    <scope>test</scope>
+</dependency>
+```
+Incluye JUnit para pruebas unitarias (solo en fase de testing).
+
+## 💻 Cómo Funciona el Código
+
+### Clase `lectorTexto`
+
+```java
+public class lectorTexto {
+    public static void main(String[] args) {
+```
+Punto de entrada de la aplicación.
+
+### Lectura del Archivo desde Resources
+
+```java
+InputStream is = lectorTexto.class.getClassLoader()
+    .getResourceAsStream("archivo.txt");
+```
+- **getClassLoader()**: Obtiene el cargador de clases
+- **getResourceAsStream()**: Busca el archivo en la carpeta `resources`
+- Esta técnica funciona tanto en desarrollo como cuando el proyecto está empaquetado en un JAR
+
+### Validación
+```java
+if (is == null) {
+    throw new FileNotFoundException("No se encontró archivo.txt en resources");
+}
+```
+Verifica que el archivo exista antes de intentar leerlo.
+
+### Lectura Línea por Línea
+```java
+BufferedReader br = new BufferedReader(new InputStreamReader(is));
+String linea;
+while ((linea = br.readLine()) != null) {
+    System.out.println(linea);
+}
+br.close();
+```
+- **BufferedReader**: Lee el texto de forma eficiente
+- **InputStreamReader**: Convierte bytes a caracteres
+- Lee cada línea y la imprime en consola
+- Cierra el BufferedReader al finalizar
+
+### Manejo de Excepciones
+```java
+catch (IOException e) {
+    throw new RuntimeException(e);
+}
+```
+Captura errores de entrada/salida y los convierte en excepciones de tiempo de ejecución.
+
+## 🚀 Cómo Usar
+
+### 1. Crear el archivo de texto
+Crea un archivo llamado `archivo.txt` en `src/main/resources/` con el contenido que desees leer.
+
+### 2. Compilar el proyecto
+```bash
+mvn clean compile
+```
+
+### 3. Ejecutar la aplicación
+```bash
+mvn exec:java -Dexec.mainClass="lectortexto.lectorTexto"
+```
+
+### 4. Generar JAR ejecutable
+```bash
+mvn clean package
+```
+
+### 5. Ejecutar el JAR
+```bash
+java -jar target/lectorTExto-1.0-SNAPSHOT.jar
+```
+
+## 📝 Notas Importantes
+
+- El archivo debe estar en `src/main/resources/` para que se incluya en el JAR
+- No uses rutas absolutas del sistema de archivos, usa `getResourceAsStream()`
+- La codificación UTF-8 asegura que se lean correctamente caracteres especiales y acentos
+- El método `getResourceAsStream()` devuelve `null` si no encuentra el archivo, no lanza excepción
+
+## 🔧 Posibles Mejoras
+
+- Permitir especificar el nombre del archivo por parámetro
+- Añadir manejo de diferentes codificaciones
+- Implementar lectura de múltiples archivos
+- Agregar logging en lugar de printStackTrace
+- Utilizar try-with-resources para cerrar automáticamente los recursos
+
+## 📄 Licencia
+
+Este proyecto es de ejemplo educativo.
+
 
 
 
