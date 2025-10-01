@@ -456,24 +456,14 @@ mvn clean package
 java -jar target/lectorTExto-1.0-SNAPSHOT.jar
 ```
 
-## 📝 Notas Importantes
 
-- El archivo debe estar en `src/main/resources/` para que se incluya en el JAR
-- No uses rutas absolutas del sistema de archivos, usa `getResourceAsStream()`
-- La codificación UTF-8 asegura que se lean correctamente caracteres especiales y acentos
-- El método `getResourceAsStream()` devuelve `null` si no encuentra el archivo, no lanza excepción
 
-## 🔧 Posibles Mejoras
+#USO DE TUBERIAS
 
-- Permitir especificar el nombre del archivo por parámetro
-- Añadir manejo de diferentes codificaciones
-- Implementar lectura de múltiples archivos
-- Agregar logging en lugar de printStackTrace
-- Utilizar try-with-resources para cerrar automáticamente los recursos
+para usar las tuberias y conectar los archivos debemos de hacer los siguientes pasos:
 
-## 📄 Licencia
-
-Este proyecto es de ejemplo educativo.
+###1.
+-Poner todos los .jar en el mismo target, en este caso he puesto todos los .jar dentro del target de lector de texto 
 
 
 
