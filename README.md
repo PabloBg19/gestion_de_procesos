@@ -476,3 +476,5 @@ para usar las tuberias y conectar los archivos debemos de hacer los siguientes p
 ### 5. ahora lo usamos con el filtrar (en este caso esta igual ya que ninguna linea ocupa menos de 20 caracteres)
 ![filtrar](listar.png)
 
+## 6. ahora usamos todos
+![todos](todo.png)
