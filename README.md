@@ -464,7 +464,7 @@ para usar las tuberias y conectar los archivos debemos de hacer los siguientes p
 
 ###1.
 -Poner todos los .jar en el mismo target, en este caso he puesto todos los .jar dentro del target de lector de texto 
-![imagen de los target](Captura de pantalla 2025-10-01 113937.png)
+![imagen target](imagentarget.png)
 
 
 
