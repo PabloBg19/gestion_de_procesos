@@ -456,15 +456,16 @@ mvn clean package
 java -jar target/lectorTExto-1.0-SNAPSHOT.jar
 ```
 
-
-
-#USO DE TUBERIAS
+# USO DE TUBERIAS
 
 para usar las tuberias y conectar los archivos debemos de hacer los siguientes pasos:
 
-###1.
--Poner todos los .jar en el mismo target, en este caso he puesto todos los .jar dentro del target de lector de texto 
+### 1. Poner todos los .jar en el mismo target, en este caso he puesto todos los .jar dentro del target de lector de texto 
+-
 ![imagen target](imagentarget.png)
+
+### 2. abrir la cmd con la ruta de los target 
+![imagen cmd](targetruta.png)
 
 
 
