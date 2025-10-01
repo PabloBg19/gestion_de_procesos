@@ -154,12 +154,152 @@ contadorPalabras/
 ---
 
 
-## 🔨 Tecnologías usadas
+##FILTRAR LINEAS
+# 📑 Filtrar Líneas
 
-- **Java** → Código principal.  
-- **Maven** → Gestión de dependencias y construcción del JAR.  
-- **JUnit** → Framework de testing.  
+Un proyecto en **Java** que lee texto desde la entrada estándar (consola o archivo) y muestra **solo aquellas líneas que tengan más de 20 caracteres**.  
+
+Está configurado con **Maven** y se empaqueta como un **JAR ejecutable**.
 
 ---
+
+## 📖 Descripción del funcionamiento
+
+El código principal está en la clase `FiltrarLineas.java`:
+
+1. **Lectura de entrada:**  
+   Se usa `InputStreamReader` y `BufferedReader` para leer líneas de texto introducidas por el usuario.
+
+   ```java
+   InputStreamReader isr = new InputStreamReader(System.in);
+   BufferedReader br = new BufferedReader(isr);
+   ```
+
+2. **Procesamiento de líneas:**  
+   Cada línea se comprueba con `linea.length() > 20`.  
+   Si la condición se cumple, se imprime en pantalla.
+
+   ```java
+   if (linea.length() > 20) {
+       System.out.println(linea);
+   }
+   ```
+
+3. **Finalización:**  
+   - Si la entrada termina (CTRL+Z en Windows o CTRL+D en Linux/Mac), el programa se detiene.  
+   - Se cierran los flujos de entrada (`br.close()` y `isr.close()`).  
+   - Si ocurre un error de lectura, se muestra el mensaje `"error al leer"`.
+
+---
+
+## ⚙️ Explicación del `pom.xml`
+
+### Configuración básica
+```xml
+<groupId>org.example</groupId>
+<artifactId>filtrarLineas</artifactId>
+<version>1.0-SNAPSHOT</version>
+<packaging>jar</packaging>
+```
+📌 Define el proyecto Maven y especifica que se construirá como un **JAR**.
+
+---
+
+### Dependencias
+```xml
+<dependency>
+  <groupId>junit</groupId>
+  <artifactId>junit</artifactId>
+  <version>3.8.1</version>
+  <scope>test</scope>
+</dependency>
+```
+📌 Incluye **JUnit** para escribir pruebas automáticas.
+
+---
+
+### Configuración del `build`
+```xml
+<build>
+    <finalName>filtrarlineas</finalName>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>3.4.1</version>
+            <configuration>
+                <archive>
+                    <manifest>
+                        <mainClass>filtrarlineas.FiltrarLineas</mainClass>
+                    </manifest>
+                </archive>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+```
+
+- **`<finalName>`** → El JAR generado se llamará `filtrarlineas.jar`.  
+- **`<mainClass>`** → Indica a Maven cuál es la clase principal (`FiltrarLineas`).  
+- **`maven-jar-plugin`** → Permite ejecutar el programa directamente con `java -jar`.
+
+---
+
+## 🚀 Ejecución del programa
+
+### 1. Compilar y empaquetar
+```bash
+mvn clean package
+```
+
+Esto genera el archivo:
+```
+target/filtrarlineas.jar
+```
+
+### 2. Ejecutar el programa
+```bash
+java -jar target/filtrarlineas.jar
+```
+
+---
+
+## 🧪 Ejemplo de uso
+
+Entrada:
+```
+Hola mundo
+Esta línea tiene más de veinte caracteres
+Corta
+Otra línea muy larga que se mostrará
+```
+
+Salida:
+```
+Esta línea tiene más de veinte caracteres
+Otra línea muy larga que se mostrará
+```
+
+---
+
+## 📂 Estructura del proyecto
+
+```
+filtrarLineas/
+├── pom.xml
+├── src/
+│   ├── main/
+│   │   └── java/
+│   │       └── filtrarlineas/
+│   │           └── FiltrarLineas.java
+│   └── test/
+│       └── java/
+│           └── filtrarlineas/
+│               └── FiltrarLineasTest.java
+```
+
+---
+
+
 
 
